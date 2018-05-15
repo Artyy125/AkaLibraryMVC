@@ -21,22 +21,33 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.BookTitle.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TotalPurchasedByLibrary)
-        </td>
-        <td>
-            --
-        </td>
-        <td>
-            @Html.ActionLink("Details", "Details", new {id = item.LibraryBookSId})
-        </td>
-        
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.BookTitle.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalPurchasedByLibrary)
+            </td>
+            <td>
+                @{
+                    int remainedValue = item.TotalPurchasedByLibrary - (item.Signout == null ? 0 : item.Signout.Value);
+                }
+                @Html.DisplayFor(modelItem => remainedValue)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", new { id = item.LibraryBookSId })
+            </td>
+            <td>
+                @Html.ActionLink("SingOut", "Index", "Signout", new { id = item.LibraryBookSId, libraryId = item.LibraryId, bookId = item.BookId }, null)
+            </td>
+            <td>
+                @Html.ActionLink("Return", "Return", "Signout", new { id = item.LibraryBookSId, libraryId = item.LibraryId, bookId = item.BookId }, null)
+
+            </td>
+
+        </tr>
+    }
 
 </table>

@@ -4,8 +4,9 @@ namespace AkaLibraryMVC.Models
     using System.Data.Entity;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
+    using AkaLibraryMVC.Interface;
 
-    public partial class LibraryModel : DbContext
+    public partial class LibraryModel : DbContext,IDbContext
     {
         public LibraryModel()
             : base("name=LibraryModelConnection")
@@ -60,5 +61,7 @@ namespace AkaLibraryMVC.Models
                 .HasForeignKey(e => e.MemberId)
                 .WillCascadeOnDelete(false);
         }
+
+        public System.Data.Entity.DbSet<AkaLibraryMVC.Models.AvailableBookModel> AvailableBookModels { get; set; }
     }
 }

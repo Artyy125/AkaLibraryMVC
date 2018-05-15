@@ -1,4 +1,9 @@
-﻿using System;
+﻿using AkaLibraryMVC.Concrete;
+using AkaLibraryMVC.Interface;
+using AkaLibraryMVC.Models;
+using Autofac;
+using Autofac.Integration.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -16,6 +21,16 @@ namespace AkaLibraryMVC
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            AutofacDIResolver();
+        }
+        private void AutofacDIResolver()
+        {
+            var builder = new ContainerBuilder();
+            builder.RegisterControllers(typeof(MvcApplication).Assembly);
+            builder.RegisterType<AllBLogics>().As<IAllBLogics>();
+            builder.RegisterType<LibraryModel>().As<IDbContext>();
+            var container = builder.Build();
+            DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
         }
     }
 }

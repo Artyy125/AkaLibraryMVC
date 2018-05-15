@@ -17,6 +17,8 @@ namespace AkaLibraryMVC.Models
 
         public int TotalPurchasedByLibrary { get; set; }
 
+        public int? Signout { get; set; }
+
         public virtual BookTitle BookTitle { get; set; }
 
         public virtual Library Library { get; set; }

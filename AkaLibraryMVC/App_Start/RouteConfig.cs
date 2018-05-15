@@ -12,7 +12,10 @@ namespace AkaLibraryMVC
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
-
+            routes.MapRoute(
+                name: "Singout",
+                url: "{controller}/{action}/{id}/{libraryId}/{bookId}"
+            );
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
