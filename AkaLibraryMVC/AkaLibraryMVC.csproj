@@ -238,6 +238,7 @@
     <Content Include="Views\BookTitles\Details.cshtml" />
     <Content Include="Views\BookTitles\Index.cshtml" />
     <Content Include="Views\Signout\Index.cshtml" />
+    <Content Include="Views\Signout\Return.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

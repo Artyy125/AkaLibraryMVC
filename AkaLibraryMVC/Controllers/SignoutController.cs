@@ -38,6 +38,7 @@ namespace AkaLibraryMVC.Controllers
             }
             return RedirectToAction("List","LibraryBook",new { id=data.Id });
         }
+        [HttpPost]
         public async Task<ActionResult> Return(AvailableBookModel data)
         {
             bool canReturn = _cm.CanReturn(data);
@@ -46,6 +47,14 @@ namespace AkaLibraryMVC.Controllers
                 _cm.DeacreasingSignout(data);
             }
             return RedirectToAction("List", "LibraryBook", new { id = data.Id });
+        }
+        public async Task<ActionResult> Return(int id, int libraryId, int bookId)
+        {
+            AvailableBookModel model = new AvailableBookModel();
+            model.Id = id;
+            model.LibraryId = libraryId;
+            model.BookId = bookId;
+            return View(model);
         }
     }
 }

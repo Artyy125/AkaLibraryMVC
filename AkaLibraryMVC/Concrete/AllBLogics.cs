@@ -120,7 +120,7 @@ namespace AkaLibraryMVC.Concrete
             try
             {
                 var result = _db.Library_Book.Where(r => r.LibraryBookSId == data.Id).FirstOrDefault();
-                var bookSignout = _db.BookSignedOuts.Where(r => r.MemberId == data.MemberId && r.LibraryBookSId == data.Id).FirstOrDefault();
+                var bookSignout = _db.BookSignedOuts.Where(r => r.MemberId == data.MemberId && r.LibraryBookSId == data.Id && r.WhenReturned == null).FirstOrDefault();
                 if (result != null)
                 {
                     bookSignout.WhenReturned = DateTime.UtcNow;
