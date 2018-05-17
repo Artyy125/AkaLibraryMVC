@@ -5,6 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using AutoMapper;
+using AkaLibraryMVC.DTO;
 
 namespace AkaLibraryMVC.Concrete
 {
@@ -14,6 +16,7 @@ namespace AkaLibraryMVC.Concrete
         public AllBLogics(IDbContext db)
         {
             _db = db;
+
         }
         public bool IsMemberExist(int memberId)
         {
@@ -93,6 +96,7 @@ namespace AkaLibraryMVC.Concrete
         {
             try
             {
+
                 var result = _db.Library_Book.Where(r => r.LibraryBookSId == data.Id).FirstOrDefault();
                 if (result != null)
                 {
@@ -105,7 +109,7 @@ namespace AkaLibraryMVC.Concrete
                     };
                     _db.BookSignedOuts.Add(info);
                     result.Signout = result.Signout == null ? 1 : result.Signout.Value + 1;
-                    _db.SaveChanges();
+                    _db.SaveChangesAsync();
                 }
             }
             catch (Exception ex)
@@ -125,7 +129,7 @@ namespace AkaLibraryMVC.Concrete
                 {
                     bookSignout.WhenReturned = DateTime.UtcNow;
                     result.Signout = result.Signout.Value - 1;
-                    _db.SaveChanges();
+                    _db.SaveChangesAsync();
                 }
             }
             catch (Exception ex)

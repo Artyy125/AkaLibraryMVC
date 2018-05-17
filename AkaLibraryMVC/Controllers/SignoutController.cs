@@ -1,5 +1,7 @@
-﻿using AkaLibraryMVC.Interface;
+﻿using AkaLibraryMVC.DTO;
+using AkaLibraryMVC.Interface;
 using AkaLibraryMVC.Models;
+using AutoMapper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,6 +31,7 @@ namespace AkaLibraryMVC.Controllers
         [HttpPost]
         public async Task<ActionResult> Signout(AvailableBookModel data)
         {
+            var t = ;
             bool isMemberExist = _cm.IsMemberExist(data.MemberId);
             bool isAvailable = _cm.IsAvailable(data);
             bool isMemberExceeded = _cm.IsMemberExceeded(data);
